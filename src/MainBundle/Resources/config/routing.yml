@@ -1,3 +1,9 @@
 main_homepage:
     path:     /
     defaults: { _controller: MainBundle:Default:index }
+get_products:
+    path:     /get_products_data
+    defaults: { _controller: MainBundle:Default:getProductsData }
+    methods: [POST]
+    options:
+        expose: true

@@ -1,8 +1,9 @@
 {
   "fileName": "main.js",
   "dependencies" : [
-    "./app/Resources/assets/js/*.js",
     "bower_components/jquery/dist/jquery.min.js",
-    "bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js"
+    "bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js",
+    "bower_components/bootstrap-select/dist/js/bootstrap-select.min.js",
+    "./app/Resources/assets/js/*.js"
   ]
 }
