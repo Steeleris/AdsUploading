@@ -4,6 +4,9 @@
     "bower_components/jquery/dist/jquery.min.js",
     "bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js",
     "bower_components/bootstrap-select/dist/js/bootstrap-select.min.js",
-    "./app/Resources/assets/js/*.js"
+    "./app/Resources/assets/js/_loader.js",
+    "./app/Resources/assets/js/_logs.js",
+    "./app/Resources/assets/js/products.js",
+    "./app/Resources/assets/js/main.js"
   ]
 }

@@ -1,41 +1,10 @@
-function loadProducts(url){
-    'use strict';
-
-    $.ajax({
-        type: 'POST',
-        url: url
-    })
-        .done(function (data) {
-
-            var productContainer = '';
-
-            $.each(data, function(key, val){
-                productContainer += '<div class="col-md-3 product-wrap">' +
-                    '<div class="product-box">' +
-                    '<div>' + val.brand.title + '</div>' +
-                    '<div>' + val.model.title + '</div>' +
-                    '<div>' + val.comment + '</div>' +
-                    '</div>' +
-                    '</div>';
-            });
-
-            $('.products-holder').html(productContainer);
-        });
-}
-
-function loader(){
-    'use strict';
-
-    $('.products-holder').html('<div class="loader"></div>');
-}
-
 (function($){
     'use strict';
 
     loader();
 
     var $brand = $('#product_brand');
-    $brand.change(function() {
+    $brand.change(function(){
         var $form = $(this).closest('form');
         var data = {};
         data[$brand.attr('name')] = $brand.val();
@@ -43,15 +12,15 @@ function loader(){
             url : $form.attr('action'),
             type: $form.attr('method'),
             data : data,
-            success: function(html) {
-                $('#product_model').parent().html(
-                    $(html).find('#product_model')
+            success: function(data){
+                $('#product_model').closest('.select-wrapper').html(
+                    $(data.html).find('#product_model')
                 );
                 $('.selectpicker').selectpicker('refresh');
+                removeErrorBorders();
             }
         });
     });
-
 
     var getProductsUrl = Routing.generate('get_products');
 
@@ -67,14 +36,36 @@ function loader(){
             data: $(this).serialize()
         })
         .done(function (data) {
-            loadProducts(getProductsUrl);
-            var parsedData = $.parseJSON(data);
-            if(parsedData.status === 'success'){
-                alert('!!');
+            if (data.status === 'success') {
+                $('#upload-form')[0].reset();
+                $('.selectpicker').selectpicker('refresh');
+
+                var successString = '<li><b>Skelbimas sėkmingai įkeltas</b></li>';
+                writeLogs(successString, 'success').delay(2000).fadeOut(300, function(){ $(this).remove(); });
+
+                loadProducts(getProductsUrl);
+            } else if(data.status === 'fail') {
+                var errorsString = '';
+
+                $.each(data.errors, function(key){
+                    $.each(data.errors[key], function(key2, val2){
+                        errorsString += '<li><b>' + val2 + '</b></li>';
+                    });
+
+                    var select = $('.error-' + key + '-select');
+                    var input = $('.error-' + key + '-input');
+
+                    if (select.length) {
+                        select.addClass('error-input');
+                    } else if (input.length) {
+                        input.addClass('error-input');
+                    }
+                });
+
+                writeLogs(errorsString, 'errors');
             }
         });
     });
 
-
-
+    removeErrorBorders();
 })(jQuery);

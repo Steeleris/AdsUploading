@@ -4,12 +4,14 @@ namespace MainBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Feature
  *
  * @ORM\Table(name="feature")
  * @ORM\Entity(repositoryClass="MainBundle\Repository\FeatureRepository")
+ * @JMS\ExclusionPolicy("all")
  */
 class Feature
 {
@@ -31,6 +33,7 @@ class Feature
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     * @JMS\Expose
      */
     private $title;
 

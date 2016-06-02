@@ -5,45 +5,61 @@
 {% block content %}
     <div class="jumbotron form-container">
         <div class="container">
-            <div class="col-md-offset-3 col-md-6">
-                {{ form_start(form, {'attr': {'id': 'upload-form'}}) }}
-                {{ form_errors(form) }}
+            <div class="col-lg-offset-3 col-lg-6 col-md-offset-1 col-md-10 form-wrapper">
+                {{ form_start(form, {'attr': {'id': 'upload-form', 'novalidate': 'novalidate'}}) }}
 
-                <div class="col-md-6 form-group">
-                    {{ form_label(form.brand) }}
-                    {{ form_errors(form.brand) }}
-                    {{ form_widget(form.brand, {'attr': {'class': 'selectpicker'}}) }}
+                <div class="col-sm-6 form-group">
+                    {{ form_label(form.brand, 'Markė') }}
+                    <div class="select-wrapper error-brand-select">
+                        {{ form_widget(form.brand, {'attr': {
+                            'class': 'selectpicker',
+                            'title': 'Nepasirinkta'
+                            }})
+                        }}
+                    </div>
                 </div>
 
-                <div class="col-md-6 form-group">
-                    {{ form_label(form.model) }}
-                    {{ form_errors(form.model) }}
-                    {{ form_widget(form.model, {'attr': {'class': 'selectpicker'}}) }}
+                <div class="col-sm-6 form-group">
+                    {{ form_label(form.model, 'Modelis') }}
+                    <div class="select-wrapper error-model-select">
+                        {{ form_widget(form.model, {'attr': {
+                            'class': 'selectpicker',
+                            'title': 'Nepasirinkta'
+                            }})
+                        }}
+                    </div>
                 </div>
 
                 <div class="col-md-12 form-group">
                     {{ form_label(form.comment, 'Komentarai') }}
-                    {{ form_errors(form.comment) }}
-                    {{ form_widget(form.comment, {'attr': {'class': 'form-control'}}) }}
+                    <small>(neprivalomas)</small>
+                    {{ form_widget(form.comment, {'attr': {
+                        'class': 'form-control error-comment-input'
+                        }})
+                    }}
                 </div>
 
                 <div class="col-md-12 form-group">
-                    {{ form_label(form.features) }}
-                    <div class="well">
+                    {{ form_label(form.features, 'Savybės') }}
+                    <small>(neprivalomas)</small>
+                    <div class="features-box">
                         {% for feature in form.features %}
                         <div class="checkbox">
-                            {{ form_widget(feature, {'attr': {'class': ''}}) }}
+                            {{ form_widget(feature) }}
                             {{ form_label(feature) }}
                         </div>
                         {% endfor %}
+
+                        {{ form_widget(form.features) }}
                     </div>
-                    {{ form_errors(form.features) }}
+                </div>
+                <div class="col-sm-8 hidden-xs form-bottom-spacing logs-container"></div>
+
+                <div class=" col-sm-4 col-xs-12 form-group form-bottom-spacing">
+                    {{ form_widget(form.submit, {'label': 'Įkelti', 'attr': {'class': 'btn btn-default btn-block'}}) }}
                 </div>
 
-                <div class="col-sm-offset-8 col-sm-4 col-xs-offset-6 col-xs-6 form-group">
-                    {{ form_widget(form.submit, {'attr': {'class': 'btn btn-success btn-block'}}) }}
-                </div>
-
+                <div class="col-sm-8 col-xs-12 visible-xs form-bottom-spacing logs-container"></div>
 
                 {{ form_end(form) }}
             </div>

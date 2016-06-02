@@ -3,12 +3,14 @@
 namespace MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Model
  *
  * @ORM\Table(name="model")
  * @ORM\Entity(repositoryClass="MainBundle\Repository\ModelRepository")
+ * @JMS\ExclusionPolicy("all")
  */
 class Model
 {
@@ -31,6 +33,7 @@ class Model
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     * @JMS\Expose
      */
     private $title;
 

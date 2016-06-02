@@ -4,12 +4,15 @@ namespace MainBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Product
  *
  * @ORM\Table(name="product")
  * @ORM\Entity(repositoryClass="MainBundle\Repository\ProductRepository")
+ * @JMS\ExclusionPolicy("all")
  */
 class Product
 {
@@ -25,18 +28,24 @@ class Product
     /**
      * @ORM\ManyToOne(targetEntity="Brand")
      * @ORM\JoinColumn(name="brand_id", referencedColumnName="id")
+     * @Assert\NotBlank(message="Paliktas tuščias laukelis - Markė")
+     * @JMS\Expose
      */
     private $brand;
 
     /**
      * @ORM\ManyToOne(targetEntity="Model")
      * @ORM\JoinColumn(name="model_id", referencedColumnName="id")
+     * @Assert\NotBlank(message="Paliktas tuščias laukelis - Modelis")
+     * @JMS\Expose
      */
     private $model;
 
     /**
      * @ORM\ManyToMany(targetEntity="Feature", inversedBy="products")
      * @ORM\JoinTable(name="products_features")
+     * @JMS\Expose
+     *
      */
     private $features;
 
@@ -44,6 +53,13 @@ class Product
      * @var string
      *
      * @ORM\Column(name="comment", type="text", nullable=true)
+     * @Assert\Length(
+     *      min = 10,
+     *      max = 350,
+     *      minMessage = "Komantarai turi būti bent {{ limit }} simbolių ilgio",
+     *      maxMessage = "Komentarai negali būti ilgesni, nei {{ limit }} simbolių"
+     * )
+     * @JMS\Expose
      */
     private $comment;
 

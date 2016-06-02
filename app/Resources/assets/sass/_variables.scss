@@ -1,9 +1,13 @@
-/*
-$navbar-default-color:                     #f8f8f8;
-$navbar-default-bg:                        #777;
-
-$navbar-default-link-color:                #e6e6e6;
-$navbar-default-link-active-color:         #555;
-$navbar-default-link-disabled-color:       #ccc;*/
-
 $navbar-default-bg:                transparentize(#ffffff, 0.85);
+
+$navbar-default-brand-color:       #555;
+
+$error-border-color:               #FF3443;
+$error-text-color:                 #FF5C69;
+$error-text-shadow-color:          #86191c;
+$error-shadow-color:               rgba(255,52,67,0.5);
+
+$success-border-color:               #7DE7A7;
+$success-text-color:                 #8EE7A3;
+$success-text-shadow-color:          #488666;
+$success-shadow-color:               rgba(125,231,167,0.5);

@@ -4,12 +4,14 @@ namespace MainBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Brand
  *
  * @ORM\Table(name="brand")
  * @ORM\Entity(repositoryClass="MainBundle\Repository\BrandRepository")
+ * @JMS\ExclusionPolicy("all")
  */
 class Brand
 {
@@ -31,6 +33,7 @@ class Brand
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     * @JMS\Expose
      */
     private $title;
 
