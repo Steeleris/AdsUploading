@@ -30,7 +30,8 @@
         "squizlabs/php_codesniffer": "^2.6",
         "doctrine/doctrine-migrations-bundle": "^1.0",
         "jms/serializer-bundle": "^1.1",
-        "friendsofsymfony/jsrouting-bundle": "^1.6"
+        "friendsofsymfony/jsrouting-bundle": "^1.6",
+        "phpunit/phpunit": "^4.8"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

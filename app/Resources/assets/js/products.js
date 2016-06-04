@@ -1,3 +1,20 @@
+var entityMap = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+    '/': '&#x2F;'
+};
+
+function escapeHtml(string) {
+    'use strict';
+
+    return String(string).replace(/[&<>"'\/]/g, function (s) {
+        return entityMap[s];
+    });
+}
+
 function loadProducts(url){
     'use strict';
 
@@ -20,15 +37,16 @@ function loadProducts(url){
                 productContainer += '<div class="col-md-4 col-sm-6 product-wrap">' +
                     '<div class="product-box">' +
                     '<p class="lead">' +
-                    val.brand.title +
-                    ' <small class="text-muted">' + val.model.title + '</small>' +
+                    escapeHtml(val.brand.title) +
+                    ' <small class="text-muted">' + escapeHtml(val.model.title) + '</small>' +
                     '</p>';
-                if (val.comment ) {
+
+                if (val.comment) {
                     if (val.comment.length > 50) {
                         val.comment = val.comment.substring(0,50) + '...';
                     }
 
-                    productContainer += '<blockquote>' + val.comment + '</blockquote>';
+                    productContainer += '<blockquote>' + escapeHtml(val.comment) + '</blockquote>';
 
                 }
                 productContainer += '<p class="features-list">';
@@ -38,7 +56,7 @@ function loadProducts(url){
                 productContainer += '<small>';
 
                 $.each(val.features, function(key2, val2){
-                    productContainer +=  val2.title;
+                    productContainer +=  escapeHtml(val2.title);
                     if (key2 >= 2) {
                         productContainer += '...';
                         return false;
